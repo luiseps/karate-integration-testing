@@ -6,4 +6,4 @@ Feature: Check returned countries by API
   Scenario: get list of all countries
     Given path '/rest/v2/all'
     When method get
-    Then status 400
+    Then status 200
