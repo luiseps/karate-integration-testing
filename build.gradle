@@ -1,0 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+group 'com.karate.test'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    test {
+        java {
+            srcDir file('src/test/java')
+            exclude '**/*UiRunner*.java'
+        }
+        resources {
+            srcDir file('src/test/java')
+            exclude '**/*.java'
+        }
+    }
+}
+
+ext {
+    karateVersion = '0.9.5'
+    cucumberReporting = '5.3.0'
+}
+
+dependencies {
+    testImplementation "com.intuit.karate:karate-junit4:$rootProject.ext.karateVersion"
+    testImplementation "com.intuit.karate:karate-apache:$rootProject.ext.karateVersion"
+    testImplementation "net.masterthought:cucumber-reporting:$rootProject.ext.cucumberReporting"
+    testImplementation 'junit:junit:4.12'
+}
+
+test {
+    include '**/*ParallelTest*'
+}
+
+
+gradle.startParameter.refreshDependencies = true
